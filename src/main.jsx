@@ -13,4 +13,7 @@ const element = Didact.createElement(
   Didact.createElement("b"),
 );
 
-console.log(element);
+const container = document.getElementById("root");
+Didact.render(element, container);
+
+
