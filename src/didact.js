@@ -49,4 +49,19 @@ function createTextElement(text) {
   };
 }
 
+let nextUnitOfWork = null;
+
+function workLoop(deadLine) {
+  let shouldYield = false;
+  while (nextUnitOfWork && !shouldYield) {
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+    shouldYield = deadLine.timeRemaining() < 1;
+  }
+  requestIdleCallback(workLoop);
+}
+
+requestIdleCallback(workLoop);
+
+function performUnitOfWork(nextUnitWork) {}
+
 export default Didact;
